@@ -91,7 +91,7 @@ public class Robot extends TimedRobot {
 
         //init PID so it doesn't try to destroy the insides on init
         // hatch.setArmPosition(.5); //Except just kidding
-        hatch.setArmPidEnabled(true);
+        hatch.setArmPidEnabled(false);
 
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
@@ -130,8 +130,9 @@ public class Robot extends TimedRobot {
             hatch.setArm(.4);
             hatch.setArmPidEnabled(false);
         }
-        else hatch.setArm(0);
-        
+        else {
+            hatch.setArm(0);
+        }
         
 
 
@@ -178,7 +179,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("pot", hatch.getPot());
         SmartDashboard.putNumber("desired value", hatch.getDesiredArmPosition());
         SmartDashboard.putNumber("arm power", hatch.getArmPower());
-        
+        SmartDashboard.putNumber("POV", Robot.oi.getAidan().getPOV());
 
     }
 }

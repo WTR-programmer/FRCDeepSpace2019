@@ -62,10 +62,10 @@ public class OI {
         aidanY.whenPressed(intakeUndeployerCmd);
         SmartDashboard.putData("Operator Y Button", intakeUndeployerCmd);
                 
-        aidanLeftBumper = new JoystickButton(aidan, XboxButtons.kBumperLeft.value);
-        HatchArmPosition lowArmPositionCmd = new HatchArmPosition(Hatch.DEFAULT_HIGH_POSITION, true);
-        aidanLeftBumper.whenPressed(lowArmPositionCmd);
-        SmartDashboard.putData("Operator Left Bumper", lowArmPositionCmd);
+        // aidanLeftBumper = new JoystickButton(aidan, XboxButtons.kBumperLeft.value);
+        // HatchArmPosition lowArmPositionCmd = new HatchArmPosition(Hatch.DEFAULT_HIGH_POSITION, true);
+        // aidanLeftBumper.whenPressed(lowArmPositionCmd);
+        // SmartDashboard.putData("Operator Left Bumper", lowArmPositionCmd);
         
         // aidanRightBumper = new JoystickButton(aidan, XboxButtons.kBumperRight.value);
         // HatchArmPosition highArmPositionCmd = new HatchArmPosition(Hatch.DEFAULT_HIGH_POSITION, true);

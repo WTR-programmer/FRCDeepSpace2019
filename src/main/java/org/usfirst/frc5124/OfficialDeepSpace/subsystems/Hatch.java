@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class Hatch extends Subsystem {
 
-    public static final double MAX_SAFE_ARM_VALUE = 1; //more than 1
+    public static final double MAX_SAFE_ARM_VALUE = 1.2; //more than 1
     public static final double MIN_SAFE_ARM_VALUE = .38;
     public static final double DEFAULT_HIGH_POSITION = .5;
     public static final double DEFAULT_LOW_POSITION = 1; 
@@ -36,7 +36,7 @@ public class Hatch extends Subsystem {
         addChild("Arm Potentiometer", armPot);
 
         //Untuned PID
-        armPid = new PIDController(1, 0, 0, armPot, new SpeedControllerX(hatchArm));
+        armPid = new PIDController(0, 0, 0, armPot, new SpeedControllerX(hatchArm));
         addChild("Arm PID", armPid);
 
         hatchEject = new DoubleSolenoid(0, 1, 6);
@@ -78,15 +78,16 @@ public class Hatch extends Subsystem {
     public double getPot(){
         return armPot.get();
     }
-    public double getArmPower(){
-        return hatchArm.getMotorOutputPercent();
-    }
+    
     public void disablePID(){
         armPid.disable();
     }
     
     public void setArm(double power) {
         hatchArm.set(ControlMode.PercentOutput, power);
+    }
+    public double getArmPower(){
+        return hatchArm.getMotorOutputPercent();
     }
     public boolean isSafeForDown(){
         return (getPot() < MAX_SAFE_ARM_VALUE);
