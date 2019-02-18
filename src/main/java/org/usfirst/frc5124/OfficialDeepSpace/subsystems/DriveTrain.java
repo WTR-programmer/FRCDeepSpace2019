@@ -2,6 +2,7 @@ package org.usfirst.frc5124.OfficialDeepSpace.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import org.usfirst.frc5124.OfficialDeepSpace.Robot;
 import org.usfirst.frc5124.OfficialDeepSpace.SendableX;
 import org.usfirst.frc5124.OfficialDeepSpace.SpeedControllerX;
 import org.usfirst.frc5124.OfficialDeepSpace.commands.Sub_DriveTrain;
@@ -100,6 +101,31 @@ public class DriveTrain extends Subsystem {
     public double getRightMotor2Voltage(){
         return rightMotor2.getBusVoltage();
     }
+    public double getRightMotor1Power(){
+        return rightMotor1.getMotorOutputPercent();
+    }
+    public double getRightMotor2Power(){
+        return rightMotor2.getMotorOutputPercent();
+    }
+    public double getLeftMotor1Power(){
+        return leftMotor1.getMotorOutputPercent();
+    }
+    public double getLeftMotor2Power(){
+        return leftMotor2.getMotorOutputPercent();
+    }
+
+    // public double getLeftMotor1Current(){
+    //     return Robot.pdp.getPDPTotalCurrent(2);     
+    // }
+    // public double getLeftMotor2Current(){
+    //     return Robot.pdp.getPDPTotalCurrent(3);     
+    // }
+    // public double getRightMotor1Current(){
+    //     return Robot.pdp.getPDPTotalCurrent(4);     
+    // }
+    // public double getRightMotor2Current(){
+    //     return Robot.pdp.getPDPTotalCurrent(5);     
+    // }
 
     //utility Function. makes min value .15
     public static double deadZone(double value) {

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 
+
 public class Hatch extends Subsystem {
 
     public static final double MAX_SAFE_ARM_VALUE = 1.2; //more than 1
@@ -65,7 +66,12 @@ public class Hatch extends Subsystem {
 
     public void launchHatch(boolean launch) {
         hatchEject.set(launch ? Value.kReverse : Value.kForward);
+    //nice
     }
+    // public boolean getHatchLaunched(){
+    //     if (hatch.hatchEject.get)
+    // }
+
 
     public double getDesiredArmPosition () {
         return armPid.getSetpoint();

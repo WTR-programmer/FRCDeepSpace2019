@@ -1,6 +1,7 @@
 package org.usfirst.frc5124.OfficialDeepSpace;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.hal.PDPJNI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc5124.OfficialDeepSpace.commands.*;
 import org.usfirst.frc5124.OfficialDeepSpace.subsystems.*;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -28,6 +28,7 @@ public class Robot extends TimedRobot {
     public static Catapult catapult;
     public static Hatch hatch;
     public static Intake intake;
+    public static PDPJNI pdp;
 
     
 
@@ -48,7 +49,8 @@ public class Robot extends TimedRobot {
         oi = new OI();
 
 
-        CameraServer.getInstance().startAutomaticCapture();
+        CameraServer.getInstance().startAutomaticCapture(0);
+        CameraServer.getInstance().startAutomaticCapture(1);
 
         chooser.setDefaultOption("Default Autonomous Command", defaultAutonomousCommand);
         SmartDashboard.putData("Auto mode", chooser);
@@ -106,13 +108,10 @@ public class Robot extends TimedRobot {
         // //shit stuff for emergency
         // hatch.setArmPidEnabled(false);
 
-        if (Robot.oi.getAidan().getTriggerAxis(Hand.kLeft) > .15) {
-            hatch.setArm(-.3);
-        }
-        else if (Robot.oi.getAidan().getTriggerAxis(Hand.kRight) > .15) {
-            hatch.setArm(.3);
-        }
-        else hatch.setArm(0);
+        
+        
+        
+        
 
         //PID Code
         // if (Robot.oi.getAidan().getPOV() == 90){
@@ -126,13 +125,26 @@ public class Robot extends TimedRobot {
             hatch.setArmPidEnabled(false);
             hatch.setArm(-.4);
         }
+        else if (Robot.oi.getAidan().getRawAxis(2) > .15){
+            hatch.setArm(-.1);
+        }
+        // else if (Robot.oi.getAidan().getRawButton(7)){
+        //     hatch.setArm(-.6);
+        // }
         else if (Robot.oi.getAidan().getPOV() == 270 && hatch.isSafeForDown()){
-            hatch.setArm(.4);
+            hatch.setArm(.65);
             hatch.setArmPidEnabled(false);
         }
+        else if (Robot.oi.getAidan().getRawAxis(3) > .15) {
+            hatch.setArm(1);
+        }
+        // else if (Robot.oi.getAidan().getRawButton(8)){
+        //     hatch.setArm(1);
+        // }
         else {
             hatch.setArm(0);
         }
+        
         
 
 
@@ -180,6 +192,19 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("desired value", hatch.getDesiredArmPosition());
         SmartDashboard.putNumber("arm power", hatch.getArmPower());
         SmartDashboard.putNumber("POV", Robot.oi.getAidan().getPOV());
+        SmartDashboard.putNumber("L1 Voltage", driveTrain.getLeftMotor1Voltage());
+        SmartDashboard.putNumber("L2 Voltage", driveTrain.getLeftMotor2Voltage());
+        SmartDashboard.putNumber("R1 Voltage", driveTrain.getRightMotor1Voltage());
+        SmartDashboard.putNumber("R2 Voltage", driveTrain.getRightMotor2Voltage());
+        SmartDashboard.putNumber("L1 Power", driveTrain.getLeftMotor1Power());
+        SmartDashboard.putNumber("L2 Power", driveTrain.getLeftMotor2Power());
+        SmartDashboard.putNumber("R1 Power", driveTrain.getRightMotor1Power());
+        SmartDashboard.putNumber("R2 Power", driveTrain.getRightMotor2Power());
+        // SmartDashboard.putNumber("L1 Current", Robot.pdp.getPDPTotalCurrent(2));
+        // SmartDashboard.putNumber("L2 Current", Robot.pdp.getPDPTotalCurrent(2));
+        // SmartDashboard.putNumber("R1 Current", Robot.pdp.getPDPTotalCurrent(2));
+        // SmartDashboard.putNumber("R2 Current", Robot.pdp.getPDPTotalCurrent(2));
+        
 
     }
 }
