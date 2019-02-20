@@ -6,7 +6,9 @@ import org.usfirst.frc5124.OfficialDeepSpace.subsystems.Hatch;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -17,99 +19,113 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class OI {
 
-    private XboxController aidan;
-    private JoystickButton aidanA;
-    private JoystickButton aidanB;
-    private JoystickButton aidanX;
-    private JoystickButton aidanY;
-    private JoystickButton aidanLeftBumper;
-    private JoystickButton aidanRightBumper;
-    private JoystickButton aidanStart;
-    private JoystickButton aidanBack;
+    private XboxController operator;
+    private JoystickButton operatorA;
+    private JoystickButton operatorB;
+    private JoystickButton operatorX;
+    private JoystickButton operatorY;
+    private JoystickButton operatorLeftBumper;
+    private JoystickButton operatorRightBumper;
+    private JoystickButton operatorStart;
+    private JoystickButton operatorBack;
+    private JoystickButton operatorLeftTrigger;
+    private JoystickButton operatorRightTrigger;
     
-    private XboxController will;
 
-    private Joystick multiPurposeJoystick;
-    private JoystickButton intakeButton;
-    private JoystickButton outTakeButton;
-    private JoystickButton hatchShootButton;
-    private JoystickButton catapultButton;
-    private JoystickButton hatchArmUpButton;
-    private JoystickButton hatchArmDownButton;
+    private XboxController will;
+    
+
+    private Joystick driver;
+    private JoystickButton trigger;
+
 
 
     public OI() {
     
-        aidan = new XboxController(0);
+        operator = new XboxController(0);
         
-        aidanA = new JoystickButton(aidan, XboxButtons.kA.value);
+        //Shoot Hatch
+        operatorA = new JoystickButton(operator, XboxButtons.kA.value);
         HatchShoot hatchShootCmd = new HatchShoot(true);
-        aidanA.whileHeld(hatchShootCmd);
+        operatorA.toggleWhenPressed(hatchShootCmd);
         SmartDashboard.putData("Operator A Button", hatchShootCmd);
         
-        aidanB = new JoystickButton(aidan, XboxButtons.kB.value);
+        //Shoot Catapult
+        operatorB = new JoystickButton(operator, XboxButtons.kB.value);
         CatapultShoot catapultShootCmd = new CatapultShoot(true);
-        aidanB.whileHeld(catapultShootCmd);
+        operatorB.whileHeld(catapultShootCmd);
         SmartDashboard.putData("Operator B Button", catapultShootCmd);
         
-        aidanX = new JoystickButton(aidan, XboxButtons.kX.value);
+        //Intake Down
+        operatorX = new JoystickButton(operator, XboxButtons.kX.value);
         IntakeDeploy intakeDeployerCmd = new IntakeDeploy(true);
-        aidanX.whenPressed(intakeDeployerCmd);
+        operatorX.whenPressed(intakeDeployerCmd);
         SmartDashboard.putData("Operator X Button", intakeDeployerCmd);
         
-        aidanY = new JoystickButton(aidan, XboxButtons.kY.value);
+        //Intake Up
+        operatorY = new JoystickButton(operator, XboxButtons.kY.value);
         IntakeDeploy intakeUndeployerCmd = new IntakeDeploy(false);
-        aidanY.whenPressed(intakeUndeployerCmd);
+        operatorY.whenPressed(intakeUndeployerCmd);
         SmartDashboard.putData("Operator Y Button", intakeUndeployerCmd);
-                
-        // aidanLeftBumper = new JoystickButton(aidan, XboxButtons.kBumperLeft.value);
-        // HatchArmPosition lowArmPositionCmd = new HatchArmPosition(Hatch.DEFAULT_HIGH_POSITION, true);
-        // aidanLeftBumper.whenPressed(lowArmPositionCmd);
-        // SmartDashboard.putData("Operator Left Bumper", lowArmPositionCmd);
-        
-        // aidanRightBumper = new JoystickButton(aidan, XboxButtons.kBumperRight.value);
-        // HatchArmPosition highArmPositionCmd = new HatchArmPosition(Hatch.DEFAULT_HIGH_POSITION, true);
-        // aidanRightBumper.whenPressed(highArmPositionCmd);
-        // SmartDashboard.putData(highArmPositionCmd);
 
-        aidanStart = new JoystickButton(aidan, XboxButtons.kStart.value);
-        aidanStart.whenPressed(new Command(){
+        //Move Hatch down normally
+        // HatchMove armDownCmd = new HatchMove(.6);
+        // if (operator.getPOV() == 90){
+        //     armDownCmd.start(); }
+        // else armDownCmd.cancel();
+        // SmartDashboard.putData("Operator Right D_Pad", armDownCmd);
         
-            @Override
-            protected void execute() {
-                Robot.hatch.disablePID();
-            }
+/*
+        //Move Hatch Up Normally
+        HatchMove armUpCmd = new HatchMove(-.4);
+        if (operator.getPOV() == 270){
+            armUpCmd.start(); }
+        else armUpCmd.cancel();
+        SmartDashboard.putData("Operator Right D_Pad", armUpCmd);
+        
+        
+        //Mega Down
+        HatchMove megaDownCmd = new HatchMove(1.0);
+        if (operator.getTriggerAxis(Hand.kRight) > .15){
+            megaDownCmd.start(); }
+        else megaDownCmd.cancel();
+        SmartDashboard.putData("Operator Right Trigger", megaDownCmd);
 
-            @Override
-            protected boolean isFinished() {
-                return true;
-            }
-        });
+        //Mega Up
+        HatchMove megaUpCmd = new HatchMove(-.6);
+        if (operator.getTriggerAxis(Hand.kLeft) > .15){
+            megaUpCmd.start(); }
+        else megaUpCmd.cancel();
+        SmartDashboard.putData("Operator Left Trigger", megaUpCmd);
+*/
+        //Disable PID
+        operatorStart = new JoystickButton(operator, XboxButtons.kStart.value);
+        HatchPIDEnabler disablePIDCmd = new HatchPIDEnabler(false); 
+        operatorStart.whenPressed(disablePIDCmd);
+        SmartDashboard.putData("Operator Start Button", disablePIDCmd);
+        
        
-        aidanBack = new JoystickButton(aidan, XboxButtons.kBack.value);
-        aidanBack.whenPressed(new Command(){
-        
-            @Override
-            protected void execute() {
-                Robot.hatch.enablePID();
-            }
+        //Enable PID
+        operatorBack = new JoystickButton(operator, XboxButtons.kBack.value);
+        HatchPIDEnabler enablePIDcmd = new HatchPIDEnabler(true); 
+        operatorStart.whenPressed(enablePIDcmd);
+        SmartDashboard.putData("Operator Back Button", enablePIDcmd);
 
-            @Override
-            protected boolean isFinished() {
-                return true;
-            }
-        });
-
-        //Multi Purpose Joystick in case we need it
+         //Intake and Outtake Commands are set to POV Up and POV Down in Intake default command
 
         
-
-
-
-    
-
         will = new XboxController(1);
-        multiPurposeJoystick = new Joystick(2);
+
+        //Joystick
+        driver = new Joystick(2);
+
+        //Allow driver to stablize arm
+        trigger = new JoystickButton(driver, 1);
+        HatchMove hatchMoveCmd = new HatchMove(-.1);
+        trigger.whileHeld(hatchMoveCmd);
+        SmartDashboard.putData("Driver Trigger", hatchMoveCmd);
+
+
 
         SmartDashboard.putData("Default Autonomous Command", Robot.defaultAutonomousCommand);
         SmartDashboard.putData("DriveTrain Subsystem Command", Robot.driveTrain.getDefaultCommand());
@@ -123,15 +139,16 @@ public class OI {
 
     }
 
-    public XboxController getAidan() {
-        return aidan;
+    //Controller Declarations
+    public XboxController getOperator() {
+        return operator;
     }
 
     public XboxController getWill(){
         return will;
     }
     public Joystick getMultiStick(){
-        return multiPurposeJoystick;
+        return driver;
     }
 
     private enum XboxButtons {
@@ -145,6 +162,7 @@ public class OI {
         kY(4),
         kBack(7),
         kStart(8);
+
     
         private final int value;
     
@@ -152,6 +170,7 @@ public class OI {
           this.value = value;
         }
       }
+      final double kLeftTrigger = 10;
 
       
 }

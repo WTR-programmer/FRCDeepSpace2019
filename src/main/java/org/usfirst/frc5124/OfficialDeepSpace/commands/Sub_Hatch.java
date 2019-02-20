@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 public class Sub_Hatch extends HatchArmPosition {
 
   public Sub_Hatch() {
+    //this requires tuned PID
     super(() -> {
-      double right = Hatch.deadZone(Robot.oi.getAidan().getTriggerAxis(Hand.kRight));
-      double left = Hatch.deadZone(Robot.oi.getAidan().getTriggerAxis(Hand.kLeft));
+      double right = Hatch.deadZone(Robot.oi.getOperator().getTriggerAxis(Hand.kRight));
+      double left = Hatch.deadZone(Robot.oi.getOperator().getTriggerAxis(Hand.kLeft));
       double change =  0.01 * Hatch.deadZone(right - left);
       return Robot.hatch.getDesiredArmPosition() + change;
     }, false);
     requires(Robot.hatch);
+    
   }
 
   @Override

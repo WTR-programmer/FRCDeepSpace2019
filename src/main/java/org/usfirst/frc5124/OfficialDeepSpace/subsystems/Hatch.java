@@ -5,6 +5,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import org.usfirst.frc5124.OfficialDeepSpace.SendableX;
 import org.usfirst.frc5124.OfficialDeepSpace.SpeedControllerX;
+import org.usfirst.frc5124.OfficialDeepSpace.commands.HatchControlls;
+import org.usfirst.frc5124.OfficialDeepSpace.commands.HatchStill;
 import org.usfirst.frc5124.OfficialDeepSpace.commands.Sub_Hatch;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -47,7 +49,7 @@ public class Hatch extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        // setDefaultCommand(new Sub_Hatch());
+        setDefaultCommand(new HatchControlls());
     }
 
     public void setArmPosition(double position) {
@@ -66,11 +68,7 @@ public class Hatch extends Subsystem {
 
     public void launchHatch(boolean launch) {
         hatchEject.set(launch ? Value.kReverse : Value.kForward);
-    //nice
     }
-    // public boolean getHatchLaunched(){
-    //     if (hatch.hatchEject.get)
-    // }
 
 
     public double getDesiredArmPosition () {

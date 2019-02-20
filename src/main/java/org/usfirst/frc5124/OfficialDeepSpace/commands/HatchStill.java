@@ -7,24 +7,14 @@
 
 package org.usfirst.frc5124.OfficialDeepSpace.commands;
 
-import java.util.function.Supplier;
 import org.usfirst.frc5124.OfficialDeepSpace.Robot;
+import org.usfirst.frc5124.OfficialDeepSpace.subsystems.Hatch;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class HatchShoot extends Command {
-
-  private Supplier<Boolean> positionSupplier;
-  // object that gives out doubles when asked for
-  // to have position change on the fly after command
-  // is created, implement supplier with the desired
-  // position returned.
-
-  public HatchShoot(boolean position) {
-    this(() -> position);
-  }
-
-  public HatchShoot(Supplier<Boolean> positionSupplier) {
-    this.positionSupplier = positionSupplier;
+public class HatchStill extends Command {
+  public HatchStill() {
+    requires(Robot.hatch);
   }
 
   // Called just before this Command runs the first time
@@ -35,8 +25,7 @@ public class HatchShoot extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.launchHatch(positionSupplier.get());
-    Robot.hatch.setArm(-.3);
+    Robot.hatch.setArm(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -54,6 +43,5 @@ public class HatchShoot extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hatch.launchHatch(false);
   }
 }
