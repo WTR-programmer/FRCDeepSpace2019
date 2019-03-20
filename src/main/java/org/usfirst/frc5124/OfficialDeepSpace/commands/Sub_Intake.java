@@ -6,7 +6,7 @@ public class Sub_Intake extends IntakeCargo {
 
     public Sub_Intake() {
         super(() -> {
-            int pov = Robot.oi.getAidan().getPOV();
+            int pov = Robot.oi.getOperator().getPOV();
             if (pov == 180) {
                 return 0.45; // intake
             }

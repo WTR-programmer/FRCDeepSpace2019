@@ -1,6 +1,7 @@
 package org.usfirst.frc5124.OfficialDeepSpace;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.hal.PDPJNI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -8,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc5124.OfficialDeepSpace.commands.*;
 import org.usfirst.frc5124.OfficialDeepSpace.subsystems.*;
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -27,6 +27,10 @@ public class Robot extends TimedRobot {
     public static Catapult catapult;
     public static Hatch hatch;
     public static Intake intake;
+<<<<<<< HEAD
+=======
+    public static PDPJNI pdp;    
+>>>>>>> 1f0248a82c417e74892f02ce3d05588732ad8fe3
 
     /**
      * This function is run when the robot is first started up and should be
@@ -44,7 +48,13 @@ public class Robot extends TimedRobot {
 
         oi = new OI();
 
+<<<<<<< HEAD
         CameraServer.getInstance().startAutomaticCapture();
+=======
+        CameraServer.getInstance().startAutomaticCapture(0);
+        CameraServer.getInstance().startAutomaticCapture(1);
+        // CameraServer.getInstance().startAutomaticCapture(2);
+>>>>>>> 1f0248a82c417e74892f02ce3d05588732ad8fe3
 
         chooser.setDefaultOption("Default Autonomous Command", defaultAutonomousCommand);
         SmartDashboard.putData("Auto mode", chooser);
@@ -85,6 +95,13 @@ public class Robot extends TimedRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
 
+<<<<<<< HEAD
+=======
+        //init PID so it doesn't try to destroy the insides on init
+        // hatch.setArmPosition(.5); //Except just kidding
+        hatch.setArmPidEnabled(false);
+
+>>>>>>> 1f0248a82c417e74892f02ce3d05588732ad8fe3
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
@@ -94,5 +111,90 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+<<<<<<< HEAD
+=======
+
+      
+
+        // if (Robot.oi.getoperator().getPOV() == 90 && hatch.isSafeForUp()){
+        //     hatch.setArmPidEnabled(false);
+        //     hatch.setArm(-.4);
+        // }
+        // else if (Robot.oi.getoperator().getRawAxis(2) > .15){
+        //     hatch.setArm(-.1);
+        // }
+        // else if (Robot.oi.getoperator().getPOV() == 270 && hatch.isSafeForDown()){
+        //     hatch.setArm(.65);
+        //     hatch.setArmPidEnabled(false);
+        // }
+        // else if (Robot.oi.getoperator().getRawAxis(3) > .15) {
+        //     hatch.setArm(1);
+        // }
+        // else {
+        //     hatch.setArm(0);
+        // }
+        
+        
+
+
+        
+        // if (Robot.oi.getMultiStick().getRawButton(6)){
+        //     Robot.hatch.launchHatch(true);
+        // }
+        // else{
+        //     Robot.hatch.launchHatch(false);
+        // }
+        // if (Robot.oi.getMultiStick().getRawButton(1) && Robot.intake.getIntakeDeployed()){
+        //     Robot.catapult.launchCatapult(true);
+        // }
+        // else {
+        //     Robot.catapult.launchCatapult(false);
+        // }
+
+        // if (Robot.oi.getMultiStick().getRawButton(8)){
+        //     Robot.intake.powerIntake(.45);
+        // } 
+        // else if (Robot.oi.getMultiStick().getRawButton(7)){
+        //     Robot.intake.powerIntake(-.45);
+        // }
+        // else {
+        //     Robot.intake.powerIntake(0);
+        // }
+        
+        
+
+        // if (Robot.oi.getMultiStick().getRawButton(3)){
+        //     Robot.intake.setIntakeDeployed(true);
+        // }
+        // else if(Robot.oi.getMultiStick().getRawButton(5)){
+        //     Robot.intake.setIntakeDeployed(false);
+        // }
+
+
+        
+
+
+
+
+
+        SmartDashboard.putNumber("pot", hatch.getPot());
+        SmartDashboard.putNumber("desired value", hatch.getDesiredArmPosition());
+        SmartDashboard.putNumber("arm power", hatch.getArmPower());
+        SmartDashboard.putNumber("POV", Robot.oi.getOperator().getPOV());
+        SmartDashboard.putNumber("L1 Voltage", driveTrain.getLeftMotor1Voltage());
+        SmartDashboard.putNumber("L2 Voltage", driveTrain.getLeftMotor2Voltage());
+        SmartDashboard.putNumber("R1 Voltage", driveTrain.getRightMotor1Voltage());
+        SmartDashboard.putNumber("R2 Voltage", driveTrain.getRightMotor2Voltage());
+        SmartDashboard.putNumber("L1 Power", driveTrain.getLeftMotor1Power());
+        SmartDashboard.putNumber("L2 Power", driveTrain.getLeftMotor2Power());
+        SmartDashboard.putNumber("R1 Power", driveTrain.getRightMotor1Power());
+        SmartDashboard.putNumber("R2 Power", driveTrain.getRightMotor2Power());
+        // SmartDashboard.putNumber("L1 Current", Robot.pdp.getPDPTotalCurrent(2));
+        // SmartDashboard.putNumber("L2 Current", Robot.pdp.getPDPTotalCurrent(2));
+        // SmartDashboard.putNumber("R1 Current", Robot.pdp.getPDPTotalCurrent(2));
+        // SmartDashboard.putNumber("R2 Current", Robot.pdp.getPDPTotalCurrent(2));
+        
+
+>>>>>>> 1f0248a82c417e74892f02ce3d05588732ad8fe3
     }
 }

@@ -9,13 +9,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Sub_Hatch extends HatchArmPower {
 
   public Sub_Hatch() {
+<<<<<<< HEAD
     /* // position change: set extends to HatchArmPosition
+=======
+    //this requires tuned PID
+>>>>>>> 1f0248a82c417e74892f02ce3d05588732ad8fe3
     super(() -> {
-      double right = Hatch.deadZone(Robot.oi.getAidan().getTriggerAxis(Hand.kRight));
-      double left = Hatch.deadZone(Robot.oi.getAidan().getTriggerAxis(Hand.kLeft));
+      double right = Hatch.deadZone(Robot.oi.getOperator().getTriggerAxis(Hand.kRight));
+      double left = Hatch.deadZone(Robot.oi.getOperator().getTriggerAxis(Hand.kLeft));
       double change =  0.01 * Hatch.deadZone(right - left);
       return Robot.hatch.getDesiredArmPosition() + change;
     }, false);
+<<<<<<< HEAD
     */
 
     // power change: set extends to HatchArmPower
@@ -38,6 +43,10 @@ public class Sub_Hatch extends HatchArmPower {
       return 0.0;
     });
 
+=======
+    requires(Robot.hatch);
+    
+>>>>>>> 1f0248a82c417e74892f02ce3d05588732ad8fe3
   }
 
   @Override
