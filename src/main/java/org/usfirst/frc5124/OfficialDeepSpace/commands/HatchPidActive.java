@@ -1,49 +1,43 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
 package org.usfirst.frc5124.OfficialDeepSpace.commands;
 
 import org.usfirst.frc5124.OfficialDeepSpace.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class IntakeDeploy extends Command {
+public class HatchPidActive extends Command {
 
-  private boolean position;
-  private boolean finished;
-  private boolean interrupt;
-
-  public IntakeDeploy (boolean position) {
-    this.position = position;
-    interrupt = false;
-  }
-
-  public IntakeDeploy () {
-    interrupt = true;
+  private boolean active;
+  
+  public HatchPidActive(boolean active) {
+    this.active = active;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    finished = false;
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (interrupt) {
-      Robot.intake.setIntakeDeployed(true);
-      return;
-    }
-    if (!Robot.catapult.getCatapultIsUp()) {
-      Robot.intake.setIntakeDeployed(position);
-      finished = true;
+    if (active) {
+      Robot.hatch.setArmPidEnabled(true);
     } else {
-      finished = position;
+      Robot.hatch.setArmPidEnabled(false);
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return finished;
+    return true;
   }
 
   // Called once after isFinished returns true
@@ -55,8 +49,5 @@ public class IntakeDeploy extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    if (interrupt) {
-      Robot.intake.setIntakeDeployed(false);
-    }
   }
 }

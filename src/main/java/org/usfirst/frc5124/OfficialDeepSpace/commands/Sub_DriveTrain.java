@@ -1,6 +1,5 @@
 package org.usfirst.frc5124.OfficialDeepSpace.commands;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -33,9 +32,9 @@ public class Sub_DriveTrain extends Command {
         // Robot.driveTrain.tankDrive(left, right);
 
 //        ARCADE DRIVE
-        double power = Robot.oi.getMultiStick().getY();
-        double x = -Robot.oi.getMultiStick().getX();
-        double z = -Robot.oi.getMultiStick().getZ();
+        double power = Robot.oi.getWill().getY();
+        double x = -Robot.oi.getWill().getX();
+        double z = -Robot.oi.getWill().getZ();
         double turn = Math.abs(x) > Math.abs(z) ? x:z;
         power = DriveTrain.deadZone(power);
         turn = DriveTrain.deadZone(turn);

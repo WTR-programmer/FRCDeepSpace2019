@@ -21,6 +21,7 @@ public class IntakeCargo extends Command {
   //This.powerSupplier referes to the outside power supplier
   public IntakeCargo(Supplier<Double> powerSupplier) {
     this.powerSupplier = powerSupplier;
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time

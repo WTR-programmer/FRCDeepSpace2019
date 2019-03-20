@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-
 public class Hatch extends Subsystem {
 
-    public static final double MAX_SAFE_ARM_VALUE = 1; //more than 1
+    public static final double MAX_SAFE_ARM_VALUE = 1;
     public static final double MIN_SAFE_ARM_VALUE = .38;
     public static final double DEFAULT_HIGH_POSITION = .5;
     public static final double DEFAULT_LOW_POSITION = 1; 
@@ -25,6 +24,8 @@ public class Hatch extends Subsystem {
     private PIDController armPid;
     private AnalogPotentiometer armPot;
     private DoubleSolenoid hatchEject;
+    private DoubleSolenoid hatchClaws;
+    
 
     public Hatch() {
 
@@ -42,11 +43,14 @@ public class Hatch extends Subsystem {
         hatchEject = new DoubleSolenoid(0, 1, 6);
         addChild("Deployer Double Solenoid", hatchEject);
 
+        hatchClaws = new DoubleSolenoid(0, 3, 4);
+        addChild("Claws Double Solenoid", hatchClaws);
+
     }
 
     @Override
     public void initDefaultCommand() {
-        // setDefaultCommand(new Sub_Hatch());
+        setDefaultCommand(new Sub_Hatch());
     }
 
     public void setArmPosition(double position) {
@@ -59,46 +63,44 @@ public class Hatch extends Subsystem {
         armPid.setSetpoint(position);
     }
 
-    public void setArmPidEnabled(boolean enabled) {
-        armPid.setEnabled(enabled);
-    }
-
     public void launchHatch(boolean launch) {
         hatchEject.set(launch ? Value.kReverse : Value.kForward);
+    }
+
+    public void activateClaws(boolean active) {
+        hatchEject.set(active ? Value.kReverse : Value.kForward);
+    }
+
+    public void setArmPidEnabled(boolean enabled) {
+        armPid.setEnabled(enabled);
     }
 
     public double getDesiredArmPosition () {
         return armPid.getSetpoint();
     }
 
-    public static double deadZone (double original) {
+    public static double deadZone(double original) {
         return Math.abs (original) < 0.1 ? 0 : original;
     }
 
     public double getPot(){
         return armPot.get();
     }
+
     public double getArmPower(){
         return hatchArm.getMotorOutputPercent();
     }
-    public void disablePID(){
-        armPid.disable();
-    }
-    
+
     public void setArm(double power) {
         hatchArm.set(ControlMode.PercentOutput, power);
     }
+
     public boolean isSafeForDown(){
         return (getPot() < MAX_SAFE_ARM_VALUE);
     }
+
     public boolean isSafeForUp() {
         return (getPot() > MIN_SAFE_ARM_VALUE);
     }
-
-    public void enablePID(){
-        armPid.enable();
-    }
-
-    
 
 }
