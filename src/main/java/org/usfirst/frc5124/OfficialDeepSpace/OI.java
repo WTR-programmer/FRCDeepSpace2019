@@ -20,18 +20,18 @@ public class OI {
     private JoystickButton operatorBack;
 
     
-    private XboxController will;
+    private Joystick will;
     
     private Joystick driver;
     private JoystickButton trigger;
 
     public OI() {
 
-        oi = new Subsystem(){
-            @Override
-            protected void initDefaultCommand() {
-            }
-        };
+        // oi = new Subsystem(){
+        //     @Override
+        //     protected void initDefaultCommand() {
+        //     }
+        // };
     
         operator = new XboxController(0);
         
@@ -72,7 +72,7 @@ public class OI {
         SmartDashboard.putData("Operator Back Button", enablePIDcmd);
 
         //Intake and Outtake Commands are set to POV Up and POV Down in Intake default command
-        will = new XboxController(1);
+        will = new Joystick(1);
 
         //Joystick
         driver = new Joystick(2);
