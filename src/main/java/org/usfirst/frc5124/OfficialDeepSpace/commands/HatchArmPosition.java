@@ -14,6 +14,9 @@ public class HatchArmPosition extends Command {
 
   public HatchArmPosition(Supplier<Double> positionSupplier, boolean killImmediately) {
     this.positionSupplier = positionSupplier;
+    if (!killImmediately) {
+      requires(Robot.hatch);
+    }
   }
 
   public HatchArmPosition(double position, boolean killImmediately) {

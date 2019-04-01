@@ -15,7 +15,6 @@ public class Sub_Hatch extends HatchArmPosition {
       double change =  0.01 * Hatch.deadZone(right - left);
       return Robot.hatch.getDesiredArmPosition() + change;
     }, false);
-    requires(Robot.hatch);
     
   }
 

@@ -13,6 +13,7 @@ import org.usfirst.frc5124.OfficialDeepSpace.subsystems.Hatch;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class HatchStill extends Command {
+  
   public HatchStill() {
     requires(Robot.hatch);
   }

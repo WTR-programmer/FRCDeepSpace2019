@@ -1,22 +1,13 @@
 package org.usfirst.frc5124.OfficialDeepSpace;
 
 import org.usfirst.frc5124.OfficialDeepSpace.commands.*;
-import org.usfirst.frc5124.OfficialDeepSpace.subsystems.Hatch;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.buttons.Trigger;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-
-/**
- * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
- */
 public class OI {
 
     private XboxController operator;
@@ -24,21 +15,14 @@ public class OI {
     private JoystickButton operatorB;
     private JoystickButton operatorX;
     private JoystickButton operatorY;
-    private JoystickButton operatorLeftBumper;
-    private JoystickButton operatorRightBumper;
     private JoystickButton operatorStart;
     private JoystickButton operatorBack;
-    private JoystickButton operatorLeftTrigger;
-    private JoystickButton operatorRightTrigger;
-    
 
+    
     private XboxController will;
     
-
     private Joystick driver;
     private JoystickButton trigger;
-
-
 
     public OI() {
     
@@ -67,53 +51,20 @@ public class OI {
         IntakeDeploy intakeUndeployerCmd = new IntakeDeploy(false);
         operatorY.whenPressed(intakeUndeployerCmd);
         SmartDashboard.putData("Operator Y Button", intakeUndeployerCmd);
-
-        //Move Hatch down normally
-        // HatchMove armDownCmd = new HatchMove(.6);
-        // if (operator.getPOV() == 90){
-        //     armDownCmd.start(); }
-        // else armDownCmd.cancel();
-        // SmartDashboard.putData("Operator Right D_Pad", armDownCmd);
         
-/*
-        //Move Hatch Up Normally
-        HatchMove armUpCmd = new HatchMove(-.4);
-        if (operator.getPOV() == 270){
-            armUpCmd.start(); }
-        else armUpCmd.cancel();
-        SmartDashboard.putData("Operator Right D_Pad", armUpCmd);
-        
-        
-        //Mega Down
-        HatchMove megaDownCmd = new HatchMove(1.0);
-        if (operator.getTriggerAxis(Hand.kRight) > .15){
-            megaDownCmd.start(); }
-        else megaDownCmd.cancel();
-        SmartDashboard.putData("Operator Right Trigger", megaDownCmd);
-
-        //Mega Up
-        HatchMove megaUpCmd = new HatchMove(-.6);
-        if (operator.getTriggerAxis(Hand.kLeft) > .15){
-            megaUpCmd.start(); }
-        else megaUpCmd.cancel();
-        SmartDashboard.putData("Operator Left Trigger", megaUpCmd);
-*/
         //Disable PID
         operatorStart = new JoystickButton(operator, XboxButtons.kStart.value);
         HatchPIDEnabler disablePIDCmd = new HatchPIDEnabler(false); 
         operatorStart.whenPressed(disablePIDCmd);
-        SmartDashboard.putData("Operator Start Button", disablePIDCmd);
-        
+        SmartDashboard.putData("Operator Start Button", disablePIDCmd);        
        
         //Enable PID
         operatorBack = new JoystickButton(operator, XboxButtons.kBack.value);
         HatchPIDEnabler enablePIDcmd = new HatchPIDEnabler(true); 
-        operatorStart.whenPressed(enablePIDcmd);
+        operatorBack.whenPressed(enablePIDcmd);
         SmartDashboard.putData("Operator Back Button", enablePIDcmd);
 
-         //Intake and Outtake Commands are set to POV Up and POV Down in Intake default command
-
-        
+        //Intake and Outtake Commands are set to POV Up and POV Down in Intake default command
         will = new XboxController(1);
 
         //Joystick
@@ -126,11 +77,10 @@ public class OI {
         SmartDashboard.putData("Driver Trigger", hatchMoveCmd);
 
 
-
         SmartDashboard.putData("Default Autonomous Command", Robot.defaultAutonomousCommand);
         SmartDashboard.putData("DriveTrain Subsystem Command", Robot.driveTrain.getDefaultCommand());
-        // SmartDashboard.putData("Hatch Subsystem Command", Robot.hatch.getDefaultCommand());
-        // SmartDashboard.putData("Intake Subsystem Command", Robot.intake.getDefaultCommand());
+        SmartDashboard.putData("Hatch Subsystem Command", Robot.hatch.getDefaultCommand());
+        SmartDashboard.putData("intake Subsystem Command", Robot.intake.getDefaultCommand());
 
         LiveWindow.add(Robot.driveTrain);
         LiveWindow.add(Robot.hatch);
