@@ -15,6 +15,33 @@ public class HatchControlls extends Command {
 
   @Override
   protected void execute() {
+    //  //Move Hatch down normally
+    //  HatchMove armDownCmd = new HatchMove(.6);
+    //  if (Robot.oi.getoperator().getPOV() == 90){
+    //      armDownCmd.start(); }
+    //  else armDownCmd.cancel();
+
+     
+
+    //  //Move Hatch Up Normally
+    //  HatchMove armUpCmd = new HatchMove(-.4);
+    //  if (Robot.oi.getoperator().getPOV() == 270){
+    //      armUpCmd.start(); }
+    //  else armUpCmd.cancel();
+
+     
+     
+    //  //Mega Down
+    //  HatchMove megaDownCmd = new HatchMove(1.0);
+    //  if (Robot.oi.getoperator().getTriggerAxis(Hand.kRight) > .15){
+    //      megaDownCmd.start(); }
+    //  else megaDownCmd.cancel();
+
+    //  //Mega Up
+    //  HatchMove megaUpCmd = new HatchMove(-.6);
+    //  if (Robot.oi.getoperator().getTriggerAxis(Hand.kLeft) > .15){
+    //      megaUpCmd.start(); }
+    //  else megaUpCmd.cancel();
     if (Robot.oi.getOperator().getPOV() == 90) {
     Robot.hatch.setArm(.6);
     }
