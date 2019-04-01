@@ -2,11 +2,12 @@ package org.usfirst.frc5124.OfficialDeepSpace;
 
 import org.usfirst.frc5124.OfficialDeepSpace.commands.*;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OI {
 
@@ -25,6 +26,12 @@ public class OI {
     private JoystickButton trigger;
 
     public OI() {
+
+        oi = new Subsystem(){
+            @Override
+            protected void initDefaultCommand() {
+            }
+        };
     
         operator = new XboxController(0);
         
@@ -82,10 +89,11 @@ public class OI {
         SmartDashboard.putData("Hatch Subsystem Command", Robot.hatch.getDefaultCommand());
         SmartDashboard.putData("intake Subsystem Command", Robot.intake.getDefaultCommand());
 
-        LiveWindow.add(Robot.driveTrain);
-        LiveWindow.add(Robot.hatch);
-        LiveWindow.add(Robot.intake);
-        LiveWindow.add(Robot.catapult);
+        // LiveWindow.add(Robot.driveTrain);
+        // LiveWindow.add(Robot.hatch);
+        // LiveWindow.add(Robot.intake);
+        // LiveWindow.add(Robot.catapult);
+        // LiveWindow.add(oi);
 
     }
 
@@ -94,7 +102,7 @@ public class OI {
         return operator;
     }
 
-    public XboxController getWill(){
+    public Joystick getWill(){
         return will;
     }
     public Joystick getMultiStick(){

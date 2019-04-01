@@ -15,7 +15,6 @@ public class Sub_Intake extends IntakeCargo {
             }
             return 0.0;
         });
-        requires(Robot.intake);
     }
 
     @Override

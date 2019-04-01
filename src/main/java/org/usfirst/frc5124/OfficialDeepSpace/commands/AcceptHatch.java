@@ -5,19 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc5124.OfficialDeepSpace.subsystems;
+package org.usfirst.frc5124.OfficialDeepSpace.commands;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- * Add your docs here.
- */
-public class RobotWrapper extends Subsystem {
-
-  @Override
-  public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+public class AcceptHatch extends CommandGroup {
+  /**
+   * Add your docs here.
+   */
+  public AcceptHatch() {
+    addSequential(new HatchArmPower(0.1, true));
+    addSequential(new Auto_Wait(0.1));
+    addSequential(new HatchClaws(true));
+    addSequential(new Auto_Wait(0.1));
+    addSequential(new HatchArmPower(0, true));
   }
-  
 }

@@ -6,21 +6,27 @@ import org.usfirst.frc5124.OfficialDeepSpace.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class HatchArmPosition extends Command {
+public class HatchArmPower extends Command {
 
-  private Supplier<Double> positionSupplier;
-  private boolean killImmediately;
+  private Supplier<Double> powerSupplier;
+  private boolean finished;
 
-  public HatchArmPosition(Supplier<Double> positionSupplier, boolean killImmediately) {
-    this.positionSupplier = positionSupplier;
-    this.killImmediately = killImmediately;
-    if (!killImmediately) {
-      requires(Robot.hatch);
-    }
+  public HatchArmPower(Supplier<Double> powerSupplier) {
+    this(powerSupplier, false);
   }
 
-  public HatchArmPosition(double position, boolean killImmediately) {
-    this(() -> position, killImmediately);
+  public HatchArmPower(double power) {
+    this(() -> power);
+  }
+
+  public HatchArmPower(Supplier<Double> powerSupplier, boolean killImmediately) {
+    this.powerSupplier = powerSupplier;
+    requires(Robot.hatch);
+    finished = killImmediately;
+  }
+
+  public HatchArmPower(double power, boolean killImmediately) {
+    this(() -> power, killImmediately);
   }
 
   // Called just before this Command runs the first time
@@ -32,13 +38,13 @@ public class HatchArmPosition extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.setArmPosition(positionSupplier.get());
+    Robot.hatch.setArm(powerSupplier.get());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return killImmediately;
+    return finished;
   }
 
   // Called once after isFinished returns true
@@ -50,6 +56,6 @@ public class HatchArmPosition extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hatch.setArmPidEnabled(false);
+    Robot.hatch.setArm(0);
   }
 }

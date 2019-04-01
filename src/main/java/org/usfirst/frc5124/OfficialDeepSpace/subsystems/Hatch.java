@@ -28,6 +28,8 @@ public class Hatch extends Subsystem {
     private PIDController armPid;
     private AnalogPotentiometer armPot;
     private DoubleSolenoid hatchEject;
+    private DoubleSolenoid hatchClaws;
+    
 
     public Hatch() {
 
@@ -44,6 +46,9 @@ public class Hatch extends Subsystem {
 
         hatchEject = new DoubleSolenoid(0, 1, 6);
         addChild("Deployer Double Solenoid", hatchEject);
+
+        hatchClaws = new DoubleSolenoid(0, 3, 4);
+        addChild("Claws Double Solenoid", hatchClaws);
 
     }
 
@@ -62,20 +67,23 @@ public class Hatch extends Subsystem {
         armPid.setSetpoint(position);
     }
 
-    public void setArmPidEnabled(boolean enabled) {
-        armPid.setEnabled(enabled);
-    }
-
     public void launchHatch(boolean launch) {
         hatchEject.set(launch ? Value.kReverse : Value.kForward);
     }
 
+    public void activateClaws(boolean active) {
+        hatchEject.set(active ? Value.kReverse : Value.kForward);
+    }
+
+    public void setArmPidEnabled(boolean enabled) {
+        armPid.setEnabled(enabled);
+    }
 
     public double getDesiredArmPosition () {
         return armPid.getSetpoint();
     }
 
-    public static double deadZone (double original) {
+    public static double deadZone(double original) {
         return Math.abs (original) < 0.1 ? 0 : original;
     }
 
@@ -96,14 +104,9 @@ public class Hatch extends Subsystem {
     public boolean isSafeForDown(){
         return (getPot() < MAX_SAFE_ARM_VALUE);
     }
+
     public boolean isSafeForUp() {
         return (getPot() > MIN_SAFE_ARM_VALUE);
     }
-
-    public void enablePID(){
-        armPid.enable();
-    }
-
-    
 
 }

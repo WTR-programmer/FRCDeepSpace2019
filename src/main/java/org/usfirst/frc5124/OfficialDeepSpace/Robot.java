@@ -3,7 +3,6 @@ package org.usfirst.frc5124.OfficialDeepSpace;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.hal.PDPJNI;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -28,7 +27,6 @@ public class Robot extends TimedRobot {
     public static Catapult catapult;
     public static Hatch hatch;
     public static Intake intake;
-    public static PDPJNI pdp;    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -170,10 +168,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("desired value", hatch.getDesiredArmPosition());
         SmartDashboard.putNumber("arm power", hatch.getArmPower());
         SmartDashboard.putNumber("POV", Robot.oi.getOperator().getPOV());
-        SmartDashboard.putNumber("L1 Voltage", driveTrain.getLeftMotor1Voltage());
-        SmartDashboard.putNumber("L2 Voltage", driveTrain.getLeftMotor2Voltage());
-        SmartDashboard.putNumber("R1 Voltage", driveTrain.getRightMotor1Voltage());
-        SmartDashboard.putNumber("R2 Voltage", driveTrain.getRightMotor2Voltage());
+        // SmartDashboard.putNumber("L1 Voltage", driveTrain.getLeftMotor1Voltage());
+        // SmartDashboard.putNumber("L2 Voltage", driveTrain.getLeftMotor2Voltage());
+        // SmartDashboard.putNumber("R1 Voltage", driveTrain.getRightMotor1Voltage());
+        // SmartDashboard.putNumber("R2 Voltage", driveTrain.getRightMotor2Voltage());
         SmartDashboard.putNumber("L1 Power", driveTrain.getLeftMotor1Power());
         SmartDashboard.putNumber("L2 Power", driveTrain.getLeftMotor2Power());
         SmartDashboard.putNumber("R1 Power", driveTrain.getRightMotor1Power());

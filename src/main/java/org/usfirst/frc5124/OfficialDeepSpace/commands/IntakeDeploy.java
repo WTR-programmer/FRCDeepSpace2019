@@ -8,9 +8,15 @@ public class IntakeDeploy extends Command {
 
   private boolean position;
   private boolean finished;
+  private boolean interrupt;
 
   public IntakeDeploy (boolean position) {
     this.position = position;
+    interrupt = false;
+  }
+
+  public IntakeDeploy () {
+    interrupt = true;
   }
 
   // Called just before this Command runs the first time
@@ -22,6 +28,10 @@ public class IntakeDeploy extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    if (interrupt) {
+      Robot.intake.setIntakeDeployed(true);
+      return;
+    }
     if (!Robot.catapult.getCatapultIsUp()) {
       Robot.intake.setIntakeDeployed(position);
       finished = true;
@@ -45,5 +55,8 @@ public class IntakeDeploy extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    if (interrupt) {
+      Robot.intake.setIntakeDeployed(false);
+    }
   }
 }

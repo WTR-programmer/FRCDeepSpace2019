@@ -1,44 +1,32 @@
 package org.usfirst.frc5124.OfficialDeepSpace.commands;
 
-import java.util.function.Supplier;
-
 import org.usfirst.frc5124.OfficialDeepSpace.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class HatchArmPosition extends Command {
+public class HatchClaws extends Command {
 
-  private Supplier<Double> positionSupplier;
-  private boolean killImmediately;
+  private boolean grabbed;
 
-  public HatchArmPosition(Supplier<Double> positionSupplier, boolean killImmediately) {
-    this.positionSupplier = positionSupplier;
-    this.killImmediately = killImmediately;
-    if (!killImmediately) {
-      requires(Robot.hatch);
-    }
-  }
-
-  public HatchArmPosition(double position, boolean killImmediately) {
-    this(() -> position, killImmediately);
+  public HatchClaws (boolean grabbed) {
+    this.grabbed = grabbed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.hatch.setArmPidEnabled(true);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.setArmPosition(positionSupplier.get());
+    Robot.hatch.activateClaws(grabbed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return killImmediately;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -50,6 +38,5 @@ public class HatchArmPosition extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hatch.setArmPidEnabled(false);
   }
 }
