@@ -25,24 +25,24 @@ public class Sub_DriveTrain extends Command {
     protected void execute() {
 
         // // TANK DRIVE
-        // double left = Robot.oi.getWill().getY(Hand.kLeft);
-        // double right = Robot.oi.getWill().getY(Hand.kRight);
-        // left = DriveTrain.deadZone(left);
-        // right = DriveTrain.deadZone(right);
-        // Robot.driveTrain.tankDrive(left, right);
+        double left = Robot.oi.getDriverLeft().getY();
+        double right = Robot.oi.getDriverRight().getY();
+        left = DriveTrain.deadZone(left);
+        right = DriveTrain.deadZone(right);
+        Robot.driveTrain.tankDrive(left, right);
 
 //        ARCADE DRIVE
-        double power = Robot.oi.getWill().getY();
-        double x = -Robot.oi.getWill().getX();
-        double z = -Robot.oi.getWill().getZ();
-        double turn = Math.abs(x) > Math.abs(z) ? x:z;
-        power = DriveTrain.deadZone(power);
-        turn = DriveTrain.deadZone(turn);
-        Robot.driveTrain.arcadeDrive(power, turn); 
+        // double power = Robot.oi.getWill().getY();
+        // double x = -Robot.oi.getWill().getX();
+        // double z = -Robot.oi.getWill().getZ();
+        // double turn = Math.abs(x) > Math.abs(z) ? x:z;
+        // power = DriveTrain.deadZone(power);
+        // turn = DriveTrain.deadZone(turn);
+        // Robot.driveTrain.arcadeDrive(power, turn); 
 
-        SmartDashboard.putNumber("X value ", x);
-        SmartDashboard.putNumber("Z value ", z);
-        SmartDashboard.putNumber("Turn Value ", turn);
+        // SmartDashboard.putNumber("X value ", x);
+        // SmartDashboard.putNumber("Z value ", z);
+        // SmartDashboard.putNumber("Turn Value ", turn);
 
     }
 

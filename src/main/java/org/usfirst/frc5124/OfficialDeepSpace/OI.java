@@ -20,9 +20,9 @@ public class OI {
     private JoystickButton operatorBack;
 
     
-    private Joystick will;
+    private Joystick driverLeft;
     
-    private Joystick driver;
+    private Joystick driverRight;
     private JoystickButton trigger;
 
     public OI() {
@@ -72,16 +72,14 @@ public class OI {
         SmartDashboard.putData("Operator Back Button", enablePIDcmd);
 
         //Intake and Outtake Commands are set to POV Up and POV Down in Intake default command
-        will = new Joystick(1);
-
-        //Joystick
-        driver = new Joystick(2);
+        driverLeft = new Joystick(1);
+        driverRight = new Joystick(2);
 
         //Allow driver to stablize arm
-        trigger = new JoystickButton(driver, 1);
-        HatchMove hatchMoveCmd = new HatchMove(-.1);
-        trigger.whileHeld(hatchMoveCmd);
-        SmartDashboard.putData("Driver Trigger", hatchMoveCmd);
+        // trigger = new JoystickButton(driver, 1);
+        // HatchMove hatchMoveCmd = new HatchMove(-.1);
+        // trigger.whileHeld(hatchMoveCmd);
+        // SmartDashboard.putData("Driver Trigger", hatchMoveCmd);
 
 
         SmartDashboard.putData("Default Autonomous Command", Robot.defaultAutonomousCommand);
@@ -102,11 +100,11 @@ public class OI {
         return operator;
     }
 
-    public Joystick getWill(){
-        return will;
+    public Joystick getDriverLeft(){
+        return driverLeft;
     }
-    public Joystick getMultiStick(){
-        return driver;
+    public Joystick getDriverRight(){
+        return driverRight;
     }
 
     private enum XboxButtons {
