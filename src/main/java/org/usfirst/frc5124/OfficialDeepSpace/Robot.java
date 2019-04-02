@@ -17,6 +17,7 @@ import org.usfirst.frc5124.OfficialDeepSpace.subsystems.*;
  * the project.
  */
 public class Robot extends TimedRobot {
+    //This should only be in LancasterPrep
 
     public static Command autonomousCommand;
     public static Command defaultAutonomousCommand;
