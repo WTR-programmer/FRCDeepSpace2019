@@ -32,7 +32,7 @@ public class HatchArmPosition extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.setArmPosition(positionSupplier.get());
+    // Robot.hatch.setArmPosition(positionSupplier.get());
   }
 
   // Make this return true when this Command no longer needs to run execute()

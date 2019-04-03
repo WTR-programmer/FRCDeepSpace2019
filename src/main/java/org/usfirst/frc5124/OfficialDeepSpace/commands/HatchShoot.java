@@ -46,7 +46,7 @@ public class HatchShoot extends Command {
   @Override
   protected void execute() {
     Robot.hatch.launchHatch(positionSupplier.get());
-    Robot.hatch.setArm(-.3);
+    // Robot.hatch.setArm(-.3);
   }
 
   // Make this return true when this Command no longer needs to run execute()

@@ -43,9 +43,9 @@ public class Intake extends Subsystem {
         cargoIntake.set(ControlMode.PercentOutput, power);
     }
 
-    public double getIntakeVoltage() {
-        return cargoIntake.getBusVoltage();
-    }
+    // public double getIntakeVoltage() {
+    //     return cargoIntake.getBusVoltage();
+    // }
 
     public void setIntakeDeployed(boolean deployed) {
         intakeDeploy.set(deployed ? Value.kForward : Value.kReverse);

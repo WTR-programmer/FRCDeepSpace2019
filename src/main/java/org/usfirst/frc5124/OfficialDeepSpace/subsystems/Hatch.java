@@ -57,50 +57,53 @@ public class Hatch extends Subsystem {
         setDefaultCommand(new HatchControlls());
     }
 
-    public void setArmPosition(double position) {
-        if (position > MAX_SAFE_ARM_VALUE) {
-            position = MAX_SAFE_ARM_VALUE;
-        }
-        if (position < MIN_SAFE_ARM_VALUE) {
-            position = MIN_SAFE_ARM_VALUE;
-        }
-        armPid.setSetpoint(position);
-    }
+    // public void setArmPosition(double position) {
+    //     if (position > MAX_SAFE_ARM_VALUE) {
+    //         position = MAX_SAFE_ARM_VALUE;
+    //     }
+    //     if (position < MIN_SAFE_ARM_VALUE) {
+    //         position = MIN_SAFE_ARM_VALUE;
+    //     }
+    //     armPid.setSetpoint(position);
+    // }
+    //If uncommented, also uncomment in Sub_hatch command and HatchArmPosition command
 
+    //Shoot hatch
     public void launchHatch(boolean launch) {
         hatchEject.set(launch ? Value.kReverse : Value.kForward);
     }
-
+    //activate claws
     public void activateClaws(boolean active) {
         hatchEject.set(active ? Value.kReverse : Value.kForward);
     }
-
+    //enabling and disabling PID
     public void setArmPidEnabled(boolean enabled) {
         armPid.setEnabled(enabled);
     }
-
-    public double getDesiredArmPosition () {
-        return armPid.getSetpoint();
-    }
-
-    public static double deadZone(double original) {
-        return Math.abs (original) < 0.1 ? 0 : original;
-    }
-
-    public double getPot(){
-        return armPot.get();
-    }
-    
     public void disablePID(){
         armPid.disable();
     }
-    
+    //Getting arm set Point
+    public double getDesiredArmPosition () {
+        return armPid.getSetpoint();
+    }
+    //keep number above .1
+    public static double deadZone(double original) {
+        return Math.abs (original) < 0.1 ? 0 : original;
+    }
+    //Get Position for arm
+    public double getPot(){
+        return armPot.get();
+    }
+    //Power arm
     public void setArm(double power) {
         hatchArm.set(ControlMode.PercentOutput, power);
     }
+    //Get arm power
     public double getArmPower(){
         return hatchArm.getMotorOutputPercent();
     }
+    //safety for arm
     public boolean isSafeForDown(){
         return (getPot() < MAX_SAFE_ARM_VALUE);
     }

@@ -23,7 +23,7 @@ public class OI {
     private Joystick driverLeft;
     
     private Joystick driverRight;
-    private JoystickButton trigger;
+    private JoystickButton RightTrigger;
 
     public OI() {
 
@@ -46,12 +46,15 @@ public class OI {
         CatapultShoot catapultShootCmd = new CatapultShoot(true);
         operatorB.whileHeld(catapultShootCmd);
         SmartDashboard.putData("Operator B Button", catapultShootCmd);
+    //might have something wrong with intake deployed detector
+
         
         //Intake Down
         operatorX = new JoystickButton(operator, XboxButtons.kX.value);
         IntakeDeploy intakeDeployerCmd = new IntakeDeploy(true);
         operatorX.whenPressed(intakeDeployerCmd);
         SmartDashboard.putData("Operator X Button", intakeDeployerCmd);
+     //might have something wrong with the safety
         
         //Intake Up
         operatorY = new JoystickButton(operator, XboxButtons.kY.value);
@@ -59,21 +62,15 @@ public class OI {
         operatorY.whenPressed(intakeUndeployerCmd);
         SmartDashboard.putData("Operator Y Button", intakeUndeployerCmd);
         
-        //Disable PID
-        operatorStart = new JoystickButton(operator, XboxButtons.kStart.value);
-        HatchPIDEnabler disablePIDCmd = new HatchPIDEnabler(false); 
-        operatorStart.whenPressed(disablePIDCmd);
-        SmartDashboard.putData("Operator Start Button", disablePIDCmd);        
-       
-        //Enable PID
-        operatorBack = new JoystickButton(operator, XboxButtons.kBack.value);
-        HatchPIDEnabler enablePIDcmd = new HatchPIDEnabler(true); 
-        operatorBack.whenPressed(enablePIDcmd);
-        SmartDashboard.putData("Operator Back Button", enablePIDcmd);
 
-        //Intake and Outtake Commands are set to POV Up and POV Down in Intake default command
+        //Intake and Outtake Commands are set to POV Up and POV Down in Sub_intake
+        //Hatch arm cotrolls are in Hatch Controlls command
+        
         driverLeft = new Joystick(1);
         driverRight = new Joystick(2);
+        
+
+
 
         //Allow driver to stablize arm
         // trigger = new JoystickButton(driver, 1);

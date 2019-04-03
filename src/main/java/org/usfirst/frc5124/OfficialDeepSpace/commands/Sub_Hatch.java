@@ -22,7 +22,7 @@ public class Sub_Hatch extends HatchArmPower {
   @Override
   protected void initialize() {
     Robot.hatch.setArmPidEnabled(false);
-    Robot.hatch.setArmPosition(Hatch.DEFAULT_HIGH_POSITION);
+    // Robot.hatch.setArmPosition(Hatch.DEFAULT_HIGH_POSITION);
     Robot.hatch.launchHatch(false);
   }
 

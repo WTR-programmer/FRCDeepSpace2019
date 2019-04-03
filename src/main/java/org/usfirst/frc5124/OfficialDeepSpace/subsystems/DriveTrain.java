@@ -13,6 +13,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveTrain extends Subsystem {
 
+    private boolean autoDriving;
+    private static double DEAD_ZONE = .05;
+
     private TalonSRX leftMotor1;
     private TalonSRX leftMotor2;
     private TalonSRX leftMotor3;
@@ -70,33 +73,23 @@ public class DriveTrain extends Subsystem {
     }
 
     public void arcadeDrive(double power, double turn) {
+        if(!autoDriving){
         drive.arcadeDrive(power, turn);
+        }
+    }
+    public void autoArcadeDrive(double power, double turn){
+        setAutoDriving(true);
+        drive.arcadeDrive(power, turn);
+    }
+    public void setAutoDriving(boolean visionRunning){
+        autoDriving = visionRunning;
     }
 
     public void tankDrive(double left, double right) {
         drive.tankDrive(left, right);
     }
 
-    //Functions for returning voltage
-    public double getLeftMotor1Voltage(){
-        return leftMotor1.getBusVoltage();
-    }
-
-    public double getLeftMotor2Voltage(){
-        return leftMotor2.getBusVoltage();
-    }
-
-    public double getLeftMotor3Voltage(){
-        return leftMotor3.getBusVoltage();
-    }
-
-    public double getRightMotor1Voltage(){
-        return rightMotor1.getBusVoltage();
-    }
-
-    public double getRightMotor2Voltage(){
-        return rightMotor2.getBusVoltage();
-    }
+    //Getting power for each motor
     public double getRightMotor1Power(){
         return rightMotor1.getMotorOutputPercent();
     }
@@ -110,22 +103,11 @@ public class DriveTrain extends Subsystem {
         return leftMotor2.getMotorOutputPercent();
     }
 
-    // public double getLeftMotor1Current(){
-    //     return Robot.pdp.getPDPTotalCurrent(2);     
-    // }
-    // public double getLeftMotor2Current(){
-    //     return Robot.pdp.getPDPTotalCurrent(3);     
-    // }
-    // public double getRightMotor1Current(){
-    //     return Robot.pdp.getPDPTotalCurrent(4);     
-    // }
-    // public double getRightMotor2Current(){
-    //     return Robot.pdp.getPDPTotalCurrent(5);     
-    // }
+    
 
     //utility Function. makes min value .15
     public static double deadZone(double value) {
-        if (Math.abs(value) < .15) return 0;
+        if (Math.abs(value) < Math.abs(DEAD_ZONE)) return 0;
         else return value;
     } 
 }                                                                                                                                                                             
