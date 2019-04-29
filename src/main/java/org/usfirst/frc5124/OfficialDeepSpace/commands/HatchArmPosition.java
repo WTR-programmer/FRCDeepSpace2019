@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class HatchArmPosition extends Command {
 
-  private Supplier<Double> positionSupplier;
+  // private Supplier<Double> positionSupplier;
   private boolean killImmediately;
 
   public HatchArmPosition(Supplier<Double> positionSupplier, boolean killImmediately) {
-    this.positionSupplier = positionSupplier;
+    // this.positionSupplier = positionSupplier;
     this.killImmediately = killImmediately;
     if (!killImmediately) {
       requires(Robot.hatch);

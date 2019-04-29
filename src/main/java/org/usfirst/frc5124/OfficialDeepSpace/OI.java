@@ -5,8 +5,8 @@ import org.usfirst.frc5124.OfficialDeepSpace.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+// import edu.wpi.first.wpilibj.command.Subsystem;
+// import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class OI {
@@ -16,14 +16,14 @@ public class OI {
     private JoystickButton operatorB;
     private JoystickButton operatorX;
     private JoystickButton operatorY;
-    private JoystickButton operatorStart;
-    private JoystickButton operatorBack;
+    // private JoystickButton operatorStart;
+    // private JoystickButton operatorBack;
 
     
     private Joystick driverLeft;
     
     private Joystick driverRight;
-    private JoystickButton RightTrigger;
+    // private JoystickButton RightTrigger;
 
     public OI() {
 
@@ -56,11 +56,11 @@ public class OI {
         SmartDashboard.putData("Operator X Button", intakeDeployerCmd);
      //might have something wrong with the safety
         
-        //Intake Up
+        //claws
         operatorY = new JoystickButton(operator, XboxButtons.kY.value);
-        IntakeDeploy intakeUndeployerCmd = new IntakeDeploy(false);
-        operatorY.whenPressed(intakeUndeployerCmd);
-        SmartDashboard.putData("Operator Y Button", intakeUndeployerCmd);
+        HatchClaws grabCmd= new HatchClaws(true);
+        operatorY.whenPressed(grabCmd);
+        SmartDashboard.putData("Operator Y Button", grabCmd);
         
 
         //Intake and Outtake Commands are set to POV Up and POV Down in Sub_intake

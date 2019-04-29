@@ -6,8 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import org.usfirst.frc5124.OfficialDeepSpace.SendableX;
 import org.usfirst.frc5124.OfficialDeepSpace.SpeedControllerX;
 import org.usfirst.frc5124.OfficialDeepSpace.commands.HatchControlls;
-import org.usfirst.frc5124.OfficialDeepSpace.commands.HatchStill;
-import org.usfirst.frc5124.OfficialDeepSpace.commands.Sub_Hatch;
+// import org.usfirst.frc5124.OfficialDeepSpace.commands.HatchStill;
+// import org.usfirst.frc5124.OfficialDeepSpace.commands.Sub_Hatch;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -74,7 +74,7 @@ public class Hatch extends Subsystem {
     }
     //activate claws
     public void activateClaws(boolean active) {
-        hatchEject.set(active ? Value.kReverse : Value.kForward);
+        hatchClaws.set(active ? Value.kReverse : Value.kForward);
     }
     //enabling and disabling PID
     public void setArmPidEnabled(boolean enabled) {

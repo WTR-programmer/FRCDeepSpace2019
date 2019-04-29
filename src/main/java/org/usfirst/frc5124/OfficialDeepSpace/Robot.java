@@ -1,7 +1,7 @@
 package org.usfirst.frc5124.OfficialDeepSpace;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.hal.PDPJNI;
+// import edu.wpi.first.hal.PDPJNI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -102,19 +102,17 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         Robot.hatch.setArmPidEnabled(false);
+        
+      ////arm Controlls
 
-      
-
-        // if (Robot.oi.getoperator().getPOV() == 90 && hatch.isSafeForUp()){
-        //     hatch.setArmPidEnabled(false);
-        //     hatch.setArm(-.4);
+        // if (Robot.oi.getoperator().getPOV() == 90){
+        //     hatch.setArm(.6);
         // }
         // else if (Robot.oi.getoperator().getRawAxis(2) > .15){
-        //     hatch.setArm(-.1);
+        //     hatch.setArm(-.7);
         // }
-        // else if (Robot.oi.getoperator().getPOV() == 270 && hatch.isSafeForDown()){
-        //     hatch.setArm(.65);
-        //     hatch.setArmPidEnabled(false);
+        // else if (Robot.oi.getoperator().getPOV() == 270){
+        //     hatch.setArm(-.4);
         // }
         // else if (Robot.oi.getoperator().getRawAxis(3) > .15) {
         //     hatch.setArm(1);
@@ -125,46 +123,62 @@ public class Robot extends TimedRobot {
         
         
 
-
+        ////hatch shooter
         
-        // if (Robot.oi.getMultiStick().getRawButton(6)){
+        // if (Robot.oi.getOperator().getRawButton(3)){
+         //     Robot.hatch.activateClaws(false);
         //     Robot.hatch.launchHatch(true);
         // }
         // else{
         //     Robot.hatch.launchHatch(false);
         // }
-        // if (Robot.oi.getMultiStick().getRawButton(1) && Robot.intake.getIntakeDeployed()){
+
+        ////claws
+
+        // if(Robot.oi.getOperator().getRawButton(2)){
+        //      Robot.hatch.activateClaws(true);
+        // }
+
+        ////Catapult
+
+        // if (Robot.oi.getOperator().getRawButton(1) /*&& Robot.intake.getIntakeDeployed()*/){
         //     Robot.catapult.launchCatapult(true);
         // }
         // else {
         //     Robot.catapult.launchCatapult(false);
         // }
 
-        // if (Robot.oi.getMultiStick().getRawButton(8)){
+        ////Intake
+
+        // if (Robot.oi.getoperator().getPOV() == 360){
+            ////Raw button 8?
         //     Robot.intake.powerIntake(.45);
         // } 
-        // else if (Robot.oi.getMultiStick().getRawButton(7)){
+        // else if (Robot.oi.getoperator().getPOV() == 180){
+            ////Raw button 7?
         //     Robot.intake.powerIntake(-.45);
         // }
         // else {
         //     Robot.intake.powerIntake(0);
         // }
         
-        
+        ////intake
 
-        // if (Robot.oi.getMultiStick().getRawButton(3)){
-        //     Robot.intake.setIntakeDeployed(true);
-        // }
-        // else if(Robot.oi.getMultiStick().getRawButton(5)){
+        // if (Robot.oi.getOperator().getRawButton(4) && Robot.intake.getIntakeDeployed()){
         //     Robot.intake.setIntakeDeployed(false);
         // }
+        // else if(Robot.oi.getOperator().getRawButton(4) && !Robot.intake.getIntakeDeployed()){
+        //     Robot.intake.setIntakeDeployed(true);
+        // }
+
+        
 
 
         
 
 
 
-
+        
 
         SmartDashboard.putNumber("pot", hatch.getPot());
         SmartDashboard.putNumber("desired value", hatch.getDesiredArmPosition());
