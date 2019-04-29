@@ -59,8 +59,8 @@ public class OI {
         //claws
         operatorY = new JoystickButton(operator, XboxButtons.kY.value);
         HatchClaws grabCmd= new HatchClaws(true);
-        operatorY.whenPressed(grabCmd);
-        SmartDashboard.putData("Operator Y Button", grabCmd);
+        operatorY.whenPressed(grabCmd);//these lines fixed so they can be committed
+        SmartDashboard.putData("Operator Y Button", grabCmd);//and this one
         
 
         //Intake and Outtake Commands are set to POV Up and POV Down in Sub_intake
