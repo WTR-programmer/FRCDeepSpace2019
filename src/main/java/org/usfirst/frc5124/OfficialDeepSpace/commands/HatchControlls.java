@@ -18,16 +18,16 @@ public class HatchControlls extends Command {
     //This is for Arm only
     //No safety
       if (Robot.oi.getOperator().getPOV() == 90) {
-       Robot.hatch.setArm(.6);
+       Robot.hatch.setArm(.6); // mini down
       }
       else if (Robot.oi.getOperator().getPOV() == 270){
-        Robot.hatch.setArm(-.4);
+        Robot.hatch.setArm(-.4); // mini up
       }
       else if (Robot.oi.getOperator().getTriggerAxis(Hand.kLeft) > .15){
-        Robot.hatch.setArm(-.6);
+        Robot.hatch.setArm(-.6); // mega up
       }
       else if (Robot.oi.getOperator().getTriggerAxis(Hand.kRight) > .15) {
-        Robot.hatch.setArm(1);
+        Robot.hatch.setArm(1); // mega down
       }
       else Robot.hatch.setArm(0);
   }
