@@ -59,12 +59,12 @@ public class Sub_DriveTrain extends Command {
             // Robot.driveTrain.arcadeDrive(average, turn);
         // }
         // else{
-        double left = Robot.oi.getDriverBox().getY(Hand.kLeft);
-        double right = Robot.oi.getDriverBox().getY(Hand.kRight);
-        System.out.println(left + ", " + right);
+        double left = -Robot.oi.getDriverBox().getY(Hand.kLeft);
+        double right = -Robot.oi.getDriverBox().getY(Hand.kRight);
+        // System.out.println(left + ", " + right);
         left = DriveTrain.deadZone(left);
         right = DriveTrain.deadZone(right);
-        Robot.driveTrain.tankDrive(left, right);
+        Robot.driveTrain.tankDrive(0.9 * left, 0.9 * right);
         // }
 
 //        ARCADE DRIVE

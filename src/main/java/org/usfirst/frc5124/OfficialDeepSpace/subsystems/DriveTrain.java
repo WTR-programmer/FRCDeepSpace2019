@@ -29,27 +29,27 @@ public class DriveTrain extends Subsystem {
 
         leftMotor1 = new TalonSRX(3);
         addChild("Left Motor 1", new SendableX(leftMotor1));
-        leftMotor1.setInverted(true);
+        leftMotor1.setInverted(false);
         
         leftMotor2 = new TalonSRX(2);
         addChild("Left Motor 2", new SendableX(leftMotor2));
-        leftMotor2.setInverted(true);
+        leftMotor2.setInverted(false);
 
         leftMotor3 = new TalonSRX(1);
         addChild("Left Motor 3", new SendableX(leftMotor3));
-        leftMotor3.setInverted(true);
+        leftMotor3.setInverted(false);
 
         rightMotor1 = new TalonSRX(4);
         addChild("Right Motor 1", new SendableX(rightMotor1));
-        rightMotor1.setInverted(true);
+        rightMotor1.setInverted(false);
         
         rightMotor2 = new TalonSRX(5);
         addChild("Right Motor 2", new SendableX(rightMotor2));
-        rightMotor2.setInverted(true);
+        rightMotor2.setInverted(false);
 
         rightMotor3 = new TalonSRX(6);
         addChild("Right Motor 3", new SendableX(rightMotor3));
-        rightMotor3.setInverted(true);
+        rightMotor3.setInverted(false);
 
         drive = new DifferentialDrive(
             new SpeedControllerGroup(
