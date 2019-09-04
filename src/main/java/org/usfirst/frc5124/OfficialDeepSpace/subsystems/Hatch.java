@@ -75,7 +75,7 @@ public class Hatch extends Subsystem {
     }
     //activate claws
     public void activateClaws(boolean active) {
-        hatchClaws.set(active ? Value.kReverse : Value.kForward);
+        hatchClaws.set(active ? Value.kForward : Value.kReverse);
     }
     //enabling and disabling PID
     public void setArmPidEnabled(boolean enabled) {
@@ -99,7 +99,7 @@ public class Hatch extends Subsystem {
     //Power arm
     public void setArm(double power) {
         hatchArm.set(ControlMode.PercentOutput, power);
-        System.out.println(power);
+        // System.out.println(power);
     }
     //Get arm power
     public double getArmPower(){

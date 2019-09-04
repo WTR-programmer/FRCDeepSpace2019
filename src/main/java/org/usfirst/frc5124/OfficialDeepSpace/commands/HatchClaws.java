@@ -17,7 +17,7 @@ public class HatchClaws extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatch.activateClaws(true);
+    Robot.hatch.activateClaws(false);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -35,6 +35,6 @@ public class HatchClaws extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.hatch.activateClaws(false);
+    Robot.hatch.activateClaws(true);
   }
 }

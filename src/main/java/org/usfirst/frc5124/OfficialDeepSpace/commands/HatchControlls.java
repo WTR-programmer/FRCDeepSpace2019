@@ -11,6 +11,7 @@ public class HatchControlls extends Command {
 
   @Override
   protected void initialize() {
+    Robot.hatch.activateClaws(true);
   }
 
   @Override
