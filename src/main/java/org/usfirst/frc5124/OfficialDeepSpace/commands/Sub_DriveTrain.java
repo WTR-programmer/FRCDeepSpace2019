@@ -40,6 +40,7 @@ public class Sub_DriveTrain extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+        Robot.driveTrain.setAutoDriving(false);
         inst = NetworkTableInstance.getDefault();
     limelight = inst.getTable("limelight");
     tx = limelight.getEntry("tx");
@@ -64,7 +65,7 @@ public class Sub_DriveTrain extends Command {
         // System.out.println(left + ", " + right);
         left = DriveTrain.deadZone(left);
         right = DriveTrain.deadZone(right);
-        Robot.driveTrain.tankDrive(0.9 * left, 0.9 * right);
+        Robot.driveTrain.tankDrive(0.85 * left, 0.85 * right);
         // }
 
 //        ARCADE DRIVE

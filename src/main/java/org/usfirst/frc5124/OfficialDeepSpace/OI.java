@@ -10,7 +10,10 @@ import edu.wpi.cscore.VideoSource.ConnectionStrategy;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -92,31 +95,52 @@ public class OI {
         operator = new XboxController(0);
         
         //Shoot Hatch
-        operatorA = new JoystickButton(operator, XboxButtons.kA.value);
-        HatchShoot hatchShootCmd = new HatchShoot(true);
-        operatorA.toggleWhenPressed(hatchShootCmd);
-        SmartDashboard.putData("Operator A Button", hatchShootCmd);
+        // operatorA = new JoystickButton(operator, XboxButtons.kA.value);
+        // HatchShoot hatchShootCmd = new HatchShoot(true);
+        // operatorA.toggleWhenPressed(hatchShootCmd);
+        // SmartDashboard.putData("Operator A Button", hatchShootCmd);
         
         //Shoot Catapult
         operatorB = new JoystickButton(operator, XboxButtons.kB.value);
         CatapultShoot catapultShootCmd = new CatapultShoot(true);
         operatorB.whileHeld(catapultShootCmd);
         SmartDashboard.putData("Operator B Button", catapultShootCmd);
-    //might have something wrong with intake deployed detector
 
+        // new disable button
+        Button disable = new Button() {
+            @Override
+            public boolean get() {
+                return driverBox.getBumper(Hand.kLeft) && driverBox.getBumper(Hand.kRight)
+                && driverBox.getTriggerAxis(Hand.kLeft) > 0.5 && driverBox.getTriggerAxis(Hand.kRight) > 0.5;
+            }
+        };
+        disable.whenPressed(new Command(){
+            @Override
+            protected void initialize() {
+                Robot.driveTrain.setAutoDriving(true);
+            }
         
-        //Intake Down
-        operatorX = new JoystickButton(operator, XboxButtons.kX.value);
-        IntakeDeploy intakeDeployerCmd = new IntakeDeploy();
-        operatorX.toggleWhenPressed(intakeDeployerCmd);
-        SmartDashboard.putData("Operator X Button", intakeDeployerCmd);
-     //might have something wrong with the safety
+            @Override
+            protected boolean isFinished() {
+                return true;
+            }
+        });
+        disable.close();
+
+    //might have something wrong with intake deployed detector
         
-        //claws
-        operatorY = new JoystickButton(operator, XboxButtons.kY.value);
-        HatchClaws grabCmd= new HatchClaws();
-        operatorY.toggleWhenPressed(grabCmd);
-        SmartDashboard.putData("Operator Y Button", grabCmd);
+    //     //Intake Down
+    //     operatorX = new JoystickButton(operator, XboxButtons.kX.value);
+    //     IntakeDeploy intakeDeployerCmd = new IntakeDeploy();
+    //     operatorX.toggleWhenPressed(intakeDeployerCmd);
+    //     SmartDashboard.putData("Operator X Button", intakeDeployerCmd);
+    //  //might have something wrong with the safety
+        
+    //     //claws
+    //     operatorY = new JoystickButton(operator, XboxButtons.kY.value);
+    //     HatchClaws grabCmd= new HatchClaws();
+    //     operatorY.toggleWhenPressed(grabCmd);
+    //     SmartDashboard.putData("Operator Y Button", grabCmd);
         
 
         //Intake and Outtake Commands are set to POV Up and POV Down in Sub_intake

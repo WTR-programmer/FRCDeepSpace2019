@@ -16,7 +16,6 @@ import org.usfirst.frc5124.OfficialDeepSpace.subsystems.*;
  * the project.
  */
 public class Robot extends TimedRobot {
-    //This should only be in LancasterPrep
 
     public static Command autonomousCommand;
     public static Command defaultAutonomousCommand;
@@ -39,8 +38,8 @@ public class Robot extends TimedRobot {
 
         driveTrain = new DriveTrain();
         catapult = new Catapult();
-        hatch = new Hatch();
-        intake = new Intake();
+        // hatch = new Hatch();
+        // intake = new Intake();
 
         oi = new OI();
 
@@ -186,7 +185,5 @@ public class Robot extends TimedRobot {
         // SmartDashboard.putNumber("L2 Current", Robot.pdp.getPDPTotalCurrent(2));
         // SmartDashboard.putNumber("R1 Current", Robot.pdp.getPDPTotalCurrent(2));
         // SmartDashboard.putNumber("R2 Current", Robot.pdp.getPDPTotalCurrent(2));
-        
-
     }
 }

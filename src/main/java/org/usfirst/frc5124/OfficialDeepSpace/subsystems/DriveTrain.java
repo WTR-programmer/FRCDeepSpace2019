@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class DriveTrain extends Subsystem {
 
     private boolean autoDriving;
-    private static double DEAD_ZONE = .05;
+    private static double DEAD_ZONE = .075;
 
     private TalonSRX leftMotor1;
     private TalonSRX leftMotor2;
