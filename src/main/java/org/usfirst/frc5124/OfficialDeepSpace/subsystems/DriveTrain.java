@@ -86,7 +86,9 @@ public class DriveTrain extends Subsystem {
     }
 
     public void tankDrive(double left, double right) {
+        if (!autoDriving) {
         drive.tankDrive(left, right);
+        }
     }
 
     //Getting power for each motor

@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
 
         //init PID so it doesn't try to destroy the insides on init
         // hatch.setArmPosition(.5); //Except just kidding
-        hatch.setArmPidEnabled(false);
+        // hatch.setArmPidEnabled(false);
 
         if (autonomousCommand != null) autonomousCommand.cancel();
     }
@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        Robot.hatch.setArmPidEnabled(false);
+        // Robot.hatch.setArmPidEnabled(false);
         
       ////arm Controlls
 
@@ -170,8 +170,8 @@ public class Robot extends TimedRobot {
         //     Robot.intake.setIntakeDeployed(true);
         // }
 
-        SmartDashboard.putNumber("pot", hatch.getPot());
-        SmartDashboard.putNumber("arm power", hatch.getArmPower());
+        // SmartDashboard.putNumber("pot", hatch.getPot());
+        // SmartDashboard.putNumber("arm power", hatch.getArmPower());
         SmartDashboard.putNumber("POV", Robot.oi.getOperator().getPOV());
         // SmartDashboard.putNumber("L1 Voltage", driveTrain.getLeftMotor1Voltage());
         // SmartDashboard.putNumber("L2 Voltage", driveTrain.getLeftMotor2Voltage());

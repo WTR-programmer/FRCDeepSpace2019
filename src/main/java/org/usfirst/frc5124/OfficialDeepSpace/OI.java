@@ -25,10 +25,11 @@ public class OI {
 
     private XboxController operator;
     private JoystickButton operatorA;
-    private JoystickButton operatorB;
+    private Button operatorB;
     private JoystickButton operatorX;
     private JoystickButton operatorY;
     private JoystickButton driverLeftBumper;
+    // private JoystickButton driverA;
     // private JoystickButton operatorStart;
     // private JoystickButton operatorBack;
 
@@ -92,7 +93,8 @@ public class OI {
         //     }
         // };
     
-        operator = new XboxController(0);
+        operator = new XboxController(3);
+        driverBox = new XboxController(0);
         
         //Shoot Hatch
         // operatorA = new JoystickButton(operator, XboxButtons.kA.value);
@@ -101,31 +103,17 @@ public class OI {
         // SmartDashboard.putData("Operator A Button", hatchShootCmd);
         
         //Shoot Catapult
-        operatorB = new JoystickButton(operator, XboxButtons.kB.value);
+        operatorB = new Button(){
+            @Override 
+            public boolean get(){
+                return operator.getBButton() || driverBox.getAButton();
+            }
+        };
+        // operatorB = new JoystickButton(operator, XboxButtons.kB.value);
         CatapultShoot catapultShootCmd = new CatapultShoot(true);
         operatorB.whileHeld(catapultShootCmd);
         SmartDashboard.putData("Operator B Button", catapultShootCmd);
-
-        // new disable button
-        Button disable = new Button() {
-            @Override
-            public boolean get() {
-                return driverBox.getBumper(Hand.kLeft) && driverBox.getBumper(Hand.kRight)
-                && driverBox.getTriggerAxis(Hand.kLeft) > 0.5 && driverBox.getTriggerAxis(Hand.kRight) > 0.5;
-            }
-        };
-        disable.whenPressed(new Command(){
-            @Override
-            protected void initialize() {
-                Robot.driveTrain.setAutoDriving(true);
-            }
         
-            @Override
-            protected boolean isFinished() {
-                return true;
-            }
-        });
-        disable.close();
 
     //might have something wrong with intake deployed detector
         
@@ -148,11 +136,31 @@ public class OI {
         
         driverLeft = new Joystick(1);
         driverRight = new Joystick(2);
-        
-        driverBox = new XboxController(3);
 
-        driverLeftBumper = new JoystickButton(driverBox, XboxButtons.kBumperLeft.value);
-        driverLeftBumper.whenPressed(new SwitchCamera());
+        // driverLeftBumper = new JoystickButton(driverBox, XboxButtons.kBumperLeft.value);
+        // driverLeftBumper.whenPressed(new SwitchCamera());
+
+        // new disable button
+        Button disable = new Button() {
+            @Override
+            public boolean get() {
+                return driverBox.getBumper(Hand.kLeft) && driverBox.getBumper(Hand.kRight)
+                && driverBox.getTriggerAxis(Hand.kLeft) > 0.5 && driverBox.getTriggerAxis(Hand.kRight) > 0.5;
+            }
+        };
+        disable.whenPressed(new Command(){
+            @Override
+            protected void initialize() {
+                Robot.driveTrain.setAutoDriving(true);
+            }
+        
+            @Override
+            protected boolean isFinished() {
+                return true;
+            }
+        });
+        disable.close();
+
         //Allow driver to stablize arm
         // trigger = new JoystickButton(driver, 1);
         // HatchMove hatchMoveCmd = new HatchMove(-.1);
@@ -162,8 +170,8 @@ public class OI {
 
         SmartDashboard.putData("Default Autonomous Command", Robot.defaultAutonomousCommand);
         SmartDashboard.putData("DriveTrain Subsystem Command", Robot.driveTrain.getDefaultCommand());
-        SmartDashboard.putData("Hatch Subsystem Command", Robot.hatch.getDefaultCommand());
-        SmartDashboard.putData("intake Subsystem Command", Robot.intake.getDefaultCommand());
+        // SmartDashboard.putData("Hatch Subsystem Command", Robot.hatch.getDefaultCommand());
+        // SmartDashboard.putData("intake Subsystem Command", Robot.intake.getDefaultCommand());
 
         // LiveWindow.add(Robot.driveTrain);
         // LiveWindow.add(Robot.hatch);
